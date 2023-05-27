@@ -9,9 +9,15 @@ class SoundViewController: UIViewController {
     @IBOutlet weak var nombreTextField: UITextField!
     @IBOutlet weak var agregarButton: UIButton!
     
+    @IBOutlet weak var tiempoDuracionLabel: UILabel!
+    
+    
     var grabarAudio:AVAudioRecorder?
     var reproducirAudio:AVAudioPlayer?
     var audioURL:URL?
+    // tiempo
+    var grabacionActualDuracion: TimeInterval = 0.0
+    var duracionTimer: Timer?
 
     
     override func viewDidLoad() {
@@ -28,10 +34,14 @@ class SoundViewController: UIViewController {
             grabarButton.setTitle("GRABAR", for: .normal)
             reproducirButton.isEnabled = true
             agregarButton.isEnabled = true
+            detenerDuracionTimer()
+            actualizarTiempoDuracionLabel()
         }else {
             grabarAudio?.record()
             grabarButton.setTitle("DETENER", for: .normal)
             reproducirButton.isEnabled = false
+            agregarButton.isEnabled = false
+            iniciarDuracionTimer()
         }
 
 
@@ -87,6 +97,30 @@ class SoundViewController: UIViewController {
             print(error)
         }
     }
+    // MARK: - Métodos de tiempo
+    
+    func iniciarDuracionTimer() {
+        duracionTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(actualizarTiempoDuracionLabel), userInfo: nil, repeats: true)
+    }
 
+    func detenerDuracionTimer() {
+        duracionTimer?.invalidate()
+        duracionTimer = nil
+    }
+
+    
+    @objc func actualizarTiempoDuracionLabel() {
+        if let grabarAudio = grabarAudio {
+            grabacionActualDuracion = grabarAudio.currentTime
+            let tiempoFormateado = formatearTiempoDuracion(grabacionActualDuracion)
+            tiempoDuracionLabel.text = tiempoFormateado
+        }
+    }
+
+    func formatearTiempoDuracion(_ duracion: TimeInterval) -> String {
+        let minutos = Int(duracion / 60)
+        let segundos = Int(duracion.truncatingRemainder(dividingBy: 60))
+        return String(format: "%02d:%02d", minutos, segundos)
+    }
 
 }

@@ -7,23 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		77208B552A22A82D003EDE1A /* CondoriSoundBoard.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 77208B532A22A82D003EDE1A /* CondoriSoundBoard.xcdatamodeld */; };
 		A8C33ED82A1E686C000339DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C33ED72A1E686C000339DD /* AppDelegate.swift */; };
 		A8C33EDA2A1E686C000339DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C33ED92A1E686C000339DD /* SceneDelegate.swift */; };
 		A8C33EDC2A1E686C000339DD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C33EDB2A1E686C000339DD /* ViewController.swift */; };
 		A8C33EDF2A1E686C000339DD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8C33EDD2A1E686C000339DD /* Main.storyboard */; };
-		A8C33EE22A1E686C000339DD /* CondoriSoundBoard.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A8C33EE02A1E686C000339DD /* CondoriSoundBoard.xcdatamodeld */; };
 		A8C33EE42A1E6871000339DD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A8C33EE32A1E6871000339DD /* Assets.xcassets */; };
 		A8C33EE72A1E6871000339DD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A8C33EE52A1E6871000339DD /* LaunchScreen.storyboard */; };
 		A8C33EEF2A1E712B000339DD /* SoundViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8C33EEE2A1E712B000339DD /* SoundViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		77208B542A22A82D003EDE1A /* CondoriSoundBoard.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CondoriSoundBoard.xcdatamodel; sourceTree = "<group>"; };
 		A8C33ED42A1E686C000339DD /* CondoriSoundBoard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CondoriSoundBoard.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A8C33ED72A1E686C000339DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A8C33ED92A1E686C000339DD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		A8C33EDB2A1E686C000339DD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		A8C33EDE2A1E686C000339DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		A8C33EE12A1E686C000339DD /* CondoriSoundBoard.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CondoriSoundBoard.xcdatamodel; sourceTree = "<group>"; };
 		A8C33EE32A1E6871000339DD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A8C33EE62A1E6871000339DD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A8C33EE82A1E6871000339DD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,12 +62,12 @@
 			children = (
 				A8C33ED72A1E686C000339DD /* AppDelegate.swift */,
 				A8C33ED92A1E686C000339DD /* SceneDelegate.swift */,
+				77208B532A22A82D003EDE1A /* CondoriSoundBoard.xcdatamodeld */,
 				A8C33EDB2A1E686C000339DD /* ViewController.swift */,
 				A8C33EDD2A1E686C000339DD /* Main.storyboard */,
 				A8C33EE32A1E6871000339DD /* Assets.xcassets */,
 				A8C33EE52A1E6871000339DD /* LaunchScreen.storyboard */,
 				A8C33EE82A1E6871000339DD /* Info.plist */,
-				A8C33EE02A1E686C000339DD /* CondoriSoundBoard.xcdatamodeld */,
 				A8C33EEE2A1E712B000339DD /* SoundViewController.swift */,
 			);
 			path = CondoriSoundBoard;
@@ -145,9 +145,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				A8C33EDC2A1E686C000339DD /* ViewController.swift in Sources */,
-				A8C33EE22A1E686C000339DD /* CondoriSoundBoard.xcdatamodeld in Sources */,
 				A8C33ED82A1E686C000339DD /* AppDelegate.swift in Sources */,
 				A8C33EDA2A1E686C000339DD /* SceneDelegate.swift in Sources */,
+				77208B552A22A82D003EDE1A /* CondoriSoundBoard.xcdatamodeld in Sources */,
 				A8C33EEF2A1E712B000339DD /* SoundViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -366,12 +366,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		A8C33EE02A1E686C000339DD /* CondoriSoundBoard.xcdatamodeld */ = {
+		77208B532A22A82D003EDE1A /* CondoriSoundBoard.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				A8C33EE12A1E686C000339DD /* CondoriSoundBoard.xcdatamodel */,
+				77208B542A22A82D003EDE1A /* CondoriSoundBoard.xcdatamodel */,
 			);
-			currentVersion = A8C33EE12A1E686C000339DD /* CondoriSoundBoard.xcdatamodel */;
+			currentVersion = 77208B542A22A82D003EDE1A /* CondoriSoundBoard.xcdatamodel */;
 			path = CondoriSoundBoard.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
