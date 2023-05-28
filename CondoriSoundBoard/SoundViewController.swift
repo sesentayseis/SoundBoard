@@ -1,6 +1,8 @@
 
 import UIKit
 import AVFoundation
+import CoreData
+
 
 class SoundViewController: UIViewController {
 
@@ -15,9 +17,11 @@ class SoundViewController: UIViewController {
     var grabarAudio:AVAudioRecorder?
     var reproducirAudio:AVAudioPlayer?
     var audioURL:URL?
+    var grabacion: Grabacion?
     // tiempo
     var grabacionActualDuracion: TimeInterval = 0.0
     var duracionTimer: Timer?
+    var timer: Timer?
 
     
     override func viewDidLoad() {
@@ -31,6 +35,9 @@ class SoundViewController: UIViewController {
     @IBAction func grabarTapped(_ sender: Any) {
         if grabarAudio!.isRecording{
             grabarAudio?.stop()
+            //
+            
+            //
             grabarButton.setTitle("GRABAR", for: .normal)
             reproducirButton.isEnabled = true
             agregarButton.isEnabled = true
@@ -48,21 +55,27 @@ class SoundViewController: UIViewController {
     }
     
     @IBAction func reproducirTapped(_ sender: Any) {
-        do{
+        do {
             try reproducirAudio = AVAudioPlayer(contentsOf: audioURL!)
             reproducirAudio!.play()
-            print("Reproduciendo")
-        }catch{}
+            
+            // Iniciar el temporizador
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(actualizarDuracion), userInfo: nil, repeats: true)
+        } catch {
+            print("Error al reproducir el audio: \(error.localizedDescription)")
+        }
     }
     
     @IBAction func agregarTapped(_ sender: Any) {
-        let context = (UIApplication.shared.delegate as!
-            AppDelegate).persistentContainer.viewContext
-        let grabacion = Grabacion(context: context)
-        grabacion.nombre = nombreTextField.text
-        grabacion.audio = NSData(contentsOf: audioURL!)! as Data
-        (UIApplication.shared.delegate as! AppDelegate).saveContext()
-        navigationController!.popViewController(animated: true)
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+       grabacion = Grabacion(context: context) // Utiliza la propiedad grabacion existente
+       grabacion?.nombre = nombreTextField.text
+       grabacion?.audio = NSData(contentsOf: audioURL!)! as Data
+       grabacion?.duracion = grabacionActualDuracion
+       (UIApplication.shared.delegate as! AppDelegate).saveContext()
+       navigationController!.popViewController(animated: true)
+
+       print("Duración guardada: \(grabacion?.duracion ?? 0.0)")
 
     }
     
@@ -97,7 +110,7 @@ class SoundViewController: UIViewController {
             print(error)
         }
     }
-    // MARK: - Métodos de tiempo
+    // MARK: - Métodos de grabación
     
     func iniciarDuracionTimer() {
         duracionTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(actualizarTiempoDuracionLabel), userInfo: nil, repeats: true)
@@ -108,13 +121,15 @@ class SoundViewController: UIViewController {
         duracionTimer = nil
     }
 
-    
     @objc func actualizarTiempoDuracionLabel() {
-        if let grabarAudio = grabarAudio {
-            grabacionActualDuracion = grabarAudio.currentTime
-            let tiempoFormateado = formatearTiempoDuracion(grabacionActualDuracion)
-            tiempoDuracionLabel.text = tiempoFormateado
+        if grabarAudio?.isRecording == true {
+            grabacionActualDuracion = grabarAudio?.currentTime ?? 0.0
+        } else if let reproducirAudio = reproducirAudio {
+            grabacionActualDuracion = reproducirAudio.currentTime
         }
+        
+        let tiempoFormateado = formatearTiempoDuracion(grabacionActualDuracion)
+        tiempoDuracionLabel.text = tiempoFormateado
     }
 
     func formatearTiempoDuracion(_ duracion: TimeInterval) -> String {
@@ -123,4 +138,15 @@ class SoundViewController: UIViewController {
         return String(format: "%02d:%02d", minutos, segundos)
     }
 
+    @objc func actualizarDuracion() {
+        if let reproducirAudio = reproducirAudio {
+            tiempoDuracionLabel.text = formatearDuracion(reproducirAudio.currentTime)
+        }
+    }
+
+    func formatearDuracion(_ duracion: TimeInterval) -> String {
+        let minutos = Int(duracion / 60)
+        let segundos = Int(duracion.truncatingRemainder(dividingBy: 60))
+        return String(format: "%02d:%02d", minutos, segundos)
+    }
 }
