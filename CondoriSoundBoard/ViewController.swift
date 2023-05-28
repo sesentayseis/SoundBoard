@@ -4,8 +4,7 @@ import AVFoundation
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    
-
+    @IBOutlet weak var volumeSlider: UIBarButtonItem!
     @IBOutlet weak var tablaGrabaciones: UITableView!
     
     var grabaciones:[Grabacion] = []
@@ -15,6 +14,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         super.viewDidLoad()
         tablaGrabaciones.dataSource = self
         tablaGrabaciones.delegate = self
+        
+        
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
             return grabaciones.count
@@ -88,6 +89,12 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
-
+    @IBAction func volumeChanged(_ sender: UISlider) {
+        reproducirAudio?.volume = 1.0
+        reproducirAudio?.volume = sender.value
+    }
+    
+    
+    
 }
 

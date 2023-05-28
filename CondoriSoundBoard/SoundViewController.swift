@@ -13,6 +13,8 @@ class SoundViewController: UIViewController {
     
     @IBOutlet weak var tiempoDuracionLabel: UILabel!
     
+    @IBOutlet weak var volumeSlider: UIBarButtonItem!
+    
     
     var grabarAudio:AVAudioRecorder?
     var reproducirAudio:AVAudioPlayer?
@@ -110,7 +112,17 @@ class SoundViewController: UIViewController {
             print(error)
         }
     }
-    // MARK: - Métodos de grabación
+    // MARK: - volumen
+    
+    @IBAction func volumeChanged(_ sender: UISlider) {
+        reproducirAudio?.volume = 1.0
+        reproducirAudio?.volume = sender.value
+    }
+    
+    
+    
+    
+    // MARK: - Métodos de grabación de tiempo
     
     func iniciarDuracionTimer() {
         duracionTimer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(actualizarTiempoDuracionLabel), userInfo: nil, repeats: true)
