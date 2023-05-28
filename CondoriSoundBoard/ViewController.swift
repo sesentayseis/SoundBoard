@@ -24,11 +24,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
+        /*
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "GrabacionCell")
         let grabacion = grabaciones[indexPath.row]
         cell.textLabel?.text = grabacion.nombre
+        cell.detailTextLabel?.text = "Duración: \(formatearDuracion(grabacion.duracion))"
+        return cell
+        */
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "GrabacionCell")
+        let grabacion = grabaciones[indexPath.row]
+        cell.textLabel?.text = grabacion.nombre
+        
+        let duracionString = formatearDuracion(grabacion.duracion)
+        let duracionAttributedString = NSAttributedString(string: duracionString, attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
+        
+        let duracionCompletaString = "Duración: " + duracionAttributedString.string
+        let duracionCompletaAttributedString = NSAttributedString(string: duracionCompletaString, attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray])
+        
+        cell.detailTextLabel?.attributedText = duracionCompletaAttributedString
+        
         return cell
     }
+    
+    func formatearDuracion(_ duracion: TimeInterval) -> String {
+        let minutos = Int(duracion / 60)
+        let segundos = Int(duracion.truncatingRemainder(dividingBy: 60))
+        return String(format: "%02d:%02d", minutos, segundos)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         let context = (UIApplication.shared.delegate as!
             AppDelegate).persistentContainer.viewContext
